@@ -1,0 +1,36 @@
+li{
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+button{
+    display:block;
+}
+
+.searchResults{
+    display:flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.bookImage, .title, .description, .bold{
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top:15px;
+}
+
+.description{
+    color:rgb(49, 37, 37)
+}
+
+#bookmarkButton{
+    height: 50px;
+    background-color: #dcb6af;
+}
+
+.save{
+font-family: Montserrat;
+ color:black;
+ margin-left: 5px;
+}

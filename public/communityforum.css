@@ -1,0 +1,106 @@
+.message .color {
+    background: #dcb6af ;
+  }
+  
+
+  .form-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .messages {
+    margin-top: 50px;
+    list-style: none;
+  }
+  .message {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .message .fa, .message .fa-solid {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  .indent {
+    margin-left: 20px;
+  }
+  .color {
+    color: black;
+  }
+  ul{
+    padding: 0;
+  }
+  .margin-left{
+    margin-left: 10px;
+  }
+  h1{
+    text-align: center;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #dcb6af ;
+    color: white;
+    font-family: "Great Vibes";
+    text-align: center;
+  }
+  .modal-body {
+    padding: 2px 16px;
+  }
+
+  .replyToMessage{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding-bottom: 10px ;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  #trashButton{
+    border: 1px solid white;
+    background-color: transparent
+  }

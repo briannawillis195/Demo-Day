@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Community Forum | Rich Ink</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        <!-- Logo Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- Favicon
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
+
+    <!-- Stylesheets
+    ================================================== -->
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    <link href="communityforum.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <header id="masthead" class="site-header">
+        <nav id="primary-navigation" class="site-navigation">
+            <div class="container">
+
+                <div class="navbar-header">
+                   
+                    <a class="site-title" href="/profile"><span>Rich Ink</span></a>
+
+                </div><!-- /.navbar-header -->
+
+                <div class="collapse navbar-collapse" id="agency-navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="active"><a href="/profile">Home</a></li>
+  
+
+                        </li>
+                        <li><a href="/booksearch">Book Search</a></li>
+                        <li><a href="/bookmarks">Book Shelf</a></li>
+                        <li><a href="/aiBookRecs">Book Recommendations</a></li>
+                        <li><a href="/communityforum">Community Forum</a></li>
+                        <li><a href="/logout">Logout</a></li>
+
+                    </ul>
+
+                </div>
+
+            </div>   
+        </nav><!-- /.site-navigation -->
+    </header><!-- /#mastheaed -->
+
+    <div id="hero" class="hero overlay subpage-hero contact-hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Community Forum</h1>
+
+            </div><!-- /.hero-text -->
+        </div><!-- /.hero-content -->
+    </div><!-- /.hero -->
+
+    <main id="main" class="site-main">
+
+      <div class="form-container">
+        <h2>Add a message:</h2>
+        <form action="/communityforum" method="POST">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" placeholder="name" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea placeholder="This is a space for sharing. Let us know anything! Review of a book, an author you love. . ." name="message" class="form-control"
+              required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    
+    
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Enter Reply Below:</h2>
+            <span id="close" class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <form action="communityforum/replyToMessage/:id" method="POST" class="replyToMessage">
+              <label for="response">In Response To:</label>
+              <input type="text" placeholder="name" name="response"  required>
+              <label for="name">Name:</label>
+              <input type="text" placeholder="name" name="name" required>
+              <label for="message">Reply:</label>
+              <textarea placeholder="I feel the same way!" name="message"></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    
+    
+      <h3>Messages:</h3>
+      <ul class="messages">
+        <% for(var i=0; i<messages.length; i++) {%>
+          <% if(!messages[i].reply){%>
+            <li class="message">
+              <span>
+                <%= messages[i].name %>
+              </span>
+              <span class="margin-left">
+                <%= messages[i].message %>
+              </span>
+              <span>
+                <%= messages[i].date %>
+              </span>
+              <span>
+              </span>
+              <span><i class="fa fa-plus" aria-hidden="true"></i></span>
+              <form action="/communityforum/deleteMessage/<%= messages[i]._id %>" method="POST" class="col-3">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" id="trashButton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              </form>
+            </li>
+            <% } %>
+              <% if(messages[i].reply){%>
+                <li class="indent message">
+                  <span class="color">
+                    In Response To: <%= messages[i].response %>
+                  </span>
+                  <span>
+                    <%= messages[i].name %>
+                  </span>
+                  <span>
+                    <%= messages[i].message %>
+                  </span>
+                  <span>
+                    <%= messages[i].date %>
+                  </span>
+                  <span>
+                  </span>
+                  <form action="/communityforum/deleteMessage/<%= messages[i]._id %>" method="POST" class="col-3">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" id="trashButton"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </form>
+                </li>
+                <% } %>
+                  <% } %>
+      </ul>
+    
+          
+
+
+ 
+
+    </main><!-- /#main -->
+
+    
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <script src="assets/js/jquery.countTo.min.js"></script>
+    <script src="assets/js/jquery.shuffle.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="communityforum.js"></script>
+  
+</body>
+</html>
